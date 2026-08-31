@@ -1,264 +1,205 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kugelwasser Portfolio</title>
+    <meta name="description" content="Kugelwasser – Entwickler-Portfolio mit Projekten, Technologien und aktuellen Aktivitäten.">
+    <title>Kugelwasser — Developer Portfolio</title>
     <link rel="icon" href="icon.png">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <nav class="navbar">
-                <div class="logo-container">
-                    <img src="icon.png" alt="Logo" class="logo">
-                    <span class="logo-text">Kugelwasser</span>
-                </div>
-                
-                <ul class="nav-links">
-                    <li><a href="#home">Start</a></li>
+    <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+    <header class="site-header">
+        <div class="container nav-wrap">
+            <a class="brand" href="#home" aria-label="Kugelwasser Startseite">
+                <img src="icon.png" alt="" class="brand-mark">
+                <span>Kugelwasser</span>
+            </a>
+
+            <nav aria-label="Hauptnavigation">
+                <button class="mobile-menu-btn" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menü öffnen">
+                    <span></span><span></span>
+                </button>
+                <ul class="nav-links" id="nav-links">
                     <li><a href="#about">Über mich</a></li>
                     <li><a href="#projects">Projekte</a></li>
-                    <li><a href="#skills">Kompetenzen</a></li>
+                    <li><a href="#skills">Stack</a></li>
                     <li><a href="#contact">Kontakt</a></li>
                 </ul>
-                
-                <button class="mobile-menu-btn">
-                    <i class="fas fa-bars"></i>
-                </button>
             </nav>
         </div>
     </header>
 
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1 class="animate-on-scroll">Hi, Ich bin <span>Kugelwasser</span></h1>
-                    <p class="animate-on-scroll subtitle">Ich bin ein <span class="highlight">Developer</span>, der Technologie liebt</p>
-                    <p class="animate-on-scroll description">Ich liebe es, innovative Lösungen zu entwickeln und dabei moderne Technologien zu verwenden.</p>
-                    <div class="hero-buttons">
-                        <a href="https://discord.com/users/897417264477925376" target="_blank" class="btn btn-primary animate-on-scroll">Kontaktiere mich</a>
-                        <a href="#projects" class="btn btn-secondary animate-on-scroll">Projekte ansehen</a>
+    <main id="main">
+        <section class="hero section" id="home">
+            <div class="hero-grid">
+                <div class="hero-copy reveal">
+                    <p class="eyebrow"><span class="eyebrow-dot"></span> Developer · Builder · Creator</p>
+                    <h1>Ich baue digitale Dinge, die <em>funktionieren.</em></h1>
+                    <p class="hero-lead">Hi, ich bin <strong>Luca</strong> aka Kugelwasser. Ich entwickle Web- und App-Projekte, FiveM-Systeme und kreative digitale Experimente.</p>
+                    <div class="hero-actions">
+                        <a class="button button-primary" href="#projects">Projekte entdecken <span aria-hidden="true">↗</span></a>
+                        <a class="button button-ghost" href="#contact">Kontakt aufnehmen</a>
                     </div>
-                </div>
-                <div class="hero-image">
-                    <img src="icon.png" alt="Kugelwasser" class="animate-on-scroll">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="about" id="about">
-        <div class="container">
-            <div class="section-title animate-on-scroll">
-                <h2>Über mich</h2>
-            </div>
-            <div class="about-content">
-                <div class="about-text animate-on-scroll">
-                    <p>Hallo! Ich bin Kugelwasser, bürgerlich Luca. Ich interessiere mich sehr für Technologie und ihrem Umfeld. Meine Begeisterung für die digitale Welt erschien mir erstmals 2021, als ich mit einfachen Programmiersprachen anfing und mich immer ein bisschen mehr für Technik und Computer interessierte.</p>
-                    <p>Seitdem beschäftige ich mich mit der Entwicklung von Software und lernte innerhalb der letzten Jahre viel über moderne Technologien, sowie mehrere Programmiersprachen.</p>
-                    <p>Ich bin mittlerweile in 2 Developer-Teams tätig, in denen ich an verschiedensten Projekten arbeite. Ich arbeite auch hin und wieder mal an persönlichen Projekten, wie zum Beispiel Webseiten und Apps.</p>
-                </div>
-                <div class="skills animate-on-scroll">
-                    <div class="skill-item">
-                        <h4>Web Development</h4>
-                        <p>Moderne Webentwicklung mit HTML, CSS, JavaScript und React.</p>
+                    <div class="hero-meta" aria-label="Kurzinfos">
+                        <span>Seit 2021 am Coden</span>
+                        <span class="meta-separator">/</span>
+                        <span>Web · Apps · FiveM</span>
                     </div>
-                    <div class="skill-item">
-                        <h4>App Development</h4>
-                        <p>Entwicklung von mobilen Anwendungen für Android.</p>
-                    </div>
-                    <div class="skill-item">
-                        <h4>FiveM Scripting</h4>
-                        <p>Entwicklung von Skripten und Resourcen für FiveM.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="status" id="status">
-        <div class="container">
-            <div class="section-title animate-on-scroll">
-                <h2>Was mache ich gerade?</h2>
-            </div>
-
-            <div class="status-card animate-on-scroll">
-                <div class="status-avatar-wrap">
-                    <img id="discord-avatar" src="https://cdn.discordapp.com/avatars/832589436977807420/fcc756c6bab07bbcfa8b769291e1f66b?size=256" alt="Discord Avatar" class="discord-avatar">
                 </div>
 
-                <div class="status-details">
-                    <div class="status-topline">
-                        <span id="discord-status-dot" class="status-dot"></span>
-                        <span id="discord-status-text">Lädt...</span>
+                <div class="hero-visual reveal reveal-delay">
+                    <div class="visual-frame">
+                        <div class="visual-grid" aria-hidden="true"></div>
+                        <div class="visual-orbit orbit-one" aria-hidden="true"></div>
+                        <div class="visual-orbit orbit-two" aria-hidden="true"></div>
+                        <img src="icon.png" alt="Kugelwasser Logo" class="hero-avatar">
+                        <div class="code-card" aria-hidden="true">
+                            <span>const</span> idea = <b>build()</b>;
+                        </div>
+                        <div class="floating-label label-top">CREATIVE<br><b>DEVELOPER</b></div>
+                        <div class="floating-label label-bottom">AVAILABLE<br><b>TO BUILD</b></div>
                     </div>
-                    <h3 id="discord-name">Kugelwasser</h3>
-                    <p id="discord-activity">Discord-Status wird geladen...</p>
-                    <div id="discord-meta" class="activity-meta"></div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="projects" id="projects">
-        <div class="container">
-            <div class="section-title animate-on-scroll">
-                <h2>My Projects</h2>
-            </div>
-            <div class="project-list">
-                <div class="project-card animate-on-scroll">
-                    <div class="project-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h3>Web Development</h3>
-                    <p>Moderne Webentwicklung mit HTML, CSS, JavaScript und React.</p>
-                    <span class="project-status">TODO</span>
+        <section class="about section section-muted" id="about">
+            <div class="container">
+                <div class="section-heading reveal">
+                    <p class="eyebrow">01 / Über mich</p>
+                    <h2>Neugierig auf Technik. Besessen vom Bauen.</h2>
                 </div>
-                <div class="project-card animate-on-scroll">
-                    <div class="project-icon">
-                        <i class="fas fa-server"></i>
+                <div class="about-grid">
+                    <div class="about-copy reveal">
+                        <p>Meine Begeisterung für Programmierung begann 2021. Aus ersten kleinen Experimenten wurde mit der Zeit ein ziemlich breiter Tech-Stack — von klassischen Webseiten bis zu Apps, Servern und FiveM-Resources.</p>
+                        <p>Heute arbeite ich in Developer-Teams und setze parallel eigene Ideen um. Ich mag Projekte besonders dann, wenn aus einer groben Idee am Ende etwas entsteht, das man wirklich benutzen kann.</p>
                     </div>
-                    <h3>App Development</h3>
-                    <p>Entwicklung von mobilen Anwendungen für Android.</p>
-                    <span class="project-status">TODO</span>
-                </div>
-                <div class="project-card animate-on-scroll">
-                    <div class="project-icon">
-                        <i class="fas fa-robot"></i>
+                    <div class="principles reveal reveal-delay">
+                        <article><span>01</span><h3>Build</h3><p>Von der Idee zum funktionierenden Produkt.</p></article>
+                        <article><span>02</span><h3>Learn</h3><p>Neue Technologien durch echte Projekte verstehen.</p></article>
+                        <article><span>03</span><h3>Iterate</h3><p>Testen, verbessern und nicht beim ersten Versuch stehen bleiben.</p></article>
                     </div>
-                    <h3>FiveM Scripting</h3>
-                    <p>Entwicklung von Skripten und Resourcen für FiveM.</p>
-                    <span class="project-status">TODO</span>
-                </div>
-                                <div class="project-card animate-on-scroll">
-                    <div class="project-icon">
-                        <i class="fas fa-gamepad"></i>
-                    </div>
-                    <h3>Unity</h3>
-                    <p>Erstellung interaktiver 3D- und 2D-Erlebnisse mit Unity.</p>
-                    <span class="project-status">TODO</span>
-                </div>
-                <div class="project-card animate-on-scroll">
-                    <div class="project-icon">
-                        <i class="fas fa-video"></i>
-                    </div>
-                    <h3>Video schneiden</h3>
-                    <p>Bearbeitung und Zusammenstellung von Videomaterial für professionelle Präsentationen.</p>
-                    <span class="project-status">TODO</span>
-                </div>
-                <div class="project-card animate-on-scroll">
-                    <div class="project-icon">
-                        <i class="fas fa-music"></i>
-                    </div>
-                    <h3>Beats bauen</h3>
-                    <p>Komposition von Beats und Audioproduktion für kreative Projekte.</p>
-                    <span class="project-status">TODO</span>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-<section class="languages" id="skills">
-    <div class="container">
-        <div class="section-title animate-on-scroll">
-            <h2>Sprachen & Technologien</h2>
-            <p>Sprachen und Technologien, mit denen ich arbeite</p>
-        </div>
-        <div class="languages-grid">
-            <div class="language-card html animate-on-scroll">
-                <div class="language-icon">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML">
+        <section class="status section" id="status">
+            <div class="container">
+                <div class="section-heading compact reveal">
+                    <p class="eyebrow">02 / Live</p>
+                    <h2>Was gerade läuft</h2>
                 </div>
-                <h3>HTML</h3>
-                <div class="language-info">
-                    <p>Die Standard-Markup-Sprache zum Erstellen von Webseiten und Webanwendungen, die Struktur für Webinhalte bereitstellt.</p>
+                <article class="status-card reveal">
+                    <div class="status-avatar-wrap">
+                        <img id="discord-avatar" src="icon.png" alt="Discord Avatar" class="discord-avatar">
+                        <span id="discord-status-dot" class="status-dot" aria-hidden="true"></span>
+                    </div>
+                    <div class="status-details">
+                        <div class="status-topline"><span id="discord-status-text">Lädt...</span></div>
+                        <h3 id="discord-name">Kugelwasser</h3>
+                        <p id="discord-activity">Discord-Status wird geladen...</p>
+                        <div id="discord-meta" class="activity-meta"></div>
+                    </div>
+                    <span class="live-label">LIVE</span>
+                </article>
+            </div>
+        </section>
+
+        <section class="projects section section-muted" id="projects">
+            <div class="container">
+                <div class="section-heading split reveal">
+                    <div><p class="eyebrow">03 / Selected work</p><h2>Projekte & Playground</h2></div>
+                    <p>Ein Mix aus echten Entwicklungsprojekten, Experimenten und Dingen, die ich aus Neugier gebaut habe.</p>
+                </div>
+                <div class="project-grid">
+                    <article class="project-card project-feature reveal">
+                        <div class="project-number">01</div>
+                        <div class="project-icon">WEB</div>
+                        <h3>Web Development</h3>
+                        <p>Moderne Webentwicklung mit HTML, CSS, JavaScript und React — von Landingpages bis zu interaktiven Web-Apps.</p>
+                        <div class="tag-row"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>React</span></div>
+                    </article>
+                    <article class="project-card reveal reveal-delay">
+                        <div class="project-number">02</div>
+                        <div class="project-icon">APP</div>
+                        <h3>App Development</h3>
+                        <p>Android-Anwendungen mit Kotlin und Jetpack Compose, mit Fokus auf klare und moderne Interfaces.</p>
+                        <div class="tag-row"><span>Kotlin</span><span>Compose</span><span>Android</span></div>
+                    </article>
+                    <article class="project-card reveal">
+                        <div class="project-number">03</div>
+                        <div class="project-icon">FX</div>
+                        <h3>FiveM Scripting</h3>
+                        <p>Eigene Resources, Systeme und NUI-Oberflächen für FiveM-Server — inklusive Client-, Server- und UI-Logik.</p>
+                        <div class="tag-row"><span>Lua</span><span>FiveM</span><span>NUI</span></div>
+                    </article>
+                    <article class="project-card reveal reveal-delay">
+                        <div class="project-number">04</div>
+                        <div class="project-icon">3D</div>
+                        <h3>Unity</h3>
+                        <p>Interaktive 2D- und 3D-Prototypen und Game-Ideen mit Unity.</p>
+                        <div class="tag-row"><span>Unity</span><span>Games</span><span>Prototyping</span></div>
+                    </article>
+                    <article class="project-card reveal">
+                        <div class="project-number">05</div>
+                        <div class="project-icon">VID</div>
+                        <h3>Video Editing</h3>
+                        <p>Schnitt und Aufbereitung von Videomaterial für kreative und technische Projekte.</p>
+                        <div class="tag-row"><span>Editing</span><span>Creative</span></div>
+                    </article>
+                    <article class="project-card reveal reveal-delay">
+                        <div class="project-number">06</div>
+                        <div class="project-icon">SND</div>
+                        <h3>Music & Beats</h3>
+                        <p>Beats, Sounddesign und Audioproduktion als kreativer Ausgleich zum Coding.</p>
+                        <div class="tag-row"><span>Music</span><span>Sound</span><span>Production</span></div>
+                    </article>
                 </div>
             </div>
-            <div class="language-card css animate-on-scroll">
-                <div class="language-icon">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS">
+        </section>
+
+        <section class="skills section" id="skills">
+            <div class="container">
+                <div class="section-heading reveal">
+                    <p class="eyebrow">04 / Tech stack</p>
+                    <h2>Werkzeuge, mit denen ich baue.</h2>
                 </div>
-                <h3>CSS</h3>
-                <div class="language-info">
-                    <p>Eine Stylesheet-Sprache zur Beschreibung der Formatierung von HTML-Dokumenten, einschließlich Layout, Farben und Schriftarten.</p>
-                </div>
-            </div>
-            <div class="language-card javascript animate-on-scroll">
-                <div class="language-icon">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
-                </div>
-                <h3>JavaScript</h3>
-                <div class="language-info">
-                    <p>Eine Programmiersprache, die interaktive Webseiten ermöglicht und neben HTML und CSS ein wesentlicher Bestandteil von Webanwendungen ist.</p>
-                </div>
-            </div>
-            <div class="language-card kotlin animate-on-scroll">
-                <div class="language-icon">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="Kotlin">
-                </div>
-                <h3>Kotlin</h3>
-                <div class="language-info">
-                    <p>Eine moderne Programmiersprache für die JVM, die Entwicklung von Android-Apps und anderen Anwendungen mit besserer Syntax und Sicherheit ermöglicht.</p>
+                <div class="skills-grid">
+                    <article class="tech-card reveal"><span class="tech-index">01</span><h3>HTML</h3><p>Semantische Struktur</p></article>
+                    <article class="tech-card reveal"><span class="tech-index">02</span><h3>CSS</h3><p>Layouts & Interfaces</p></article>
+                    <article class="tech-card reveal"><span class="tech-index">03</span><h3>JavaScript</h3><p>Interaktion & Logic</p></article>
+                    <article class="tech-card reveal"><span class="tech-index">04</span><h3>React</h3><p>Component-based UI</p></article>
+                    <article class="tech-card reveal"><span class="tech-index">05</span><h3>Kotlin</h3><p>Android Development</p></article>
+                    <article class="tech-card reveal"><span class="tech-index">06</span><h3>Jetpack Compose</h3><p>Modern Android UI</p></article>
+                    <article class="tech-card reveal"><span class="tech-index">07</span><h3>Lua</h3><p>FiveM Scripting</p></article>
+                    <article class="tech-card reveal"><span class="tech-index">08</span><h3>XML</h3><p>Data & Android layouts</p></article>
                 </div>
             </div>
-            <div class="language-card jetpack-compose animate-on-scroll">
-                <div class="language-icon">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jetpackcompose/jetpackcompose-original.svg" alt="Jetpack Compose">
-                </div>
-                <h3>Jetpack Compose</h3>
-                <div class="language-info">
-                    <p>Ein modernes UI-Toolkit für Android-Entwicklung mit Kotlin, das die Erstellung von Benutzeroberflächen deklarativ und intuitiv macht.</p>
-                </div>
-            </div>
-            <div class="language-card xml animate-on-scroll">
-                <div class="language-icon">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xml/xml-original.svg" alt="XML">
-                </div>
-                <h3>XML</h3>
-                <div class="language-info">
-                    <p>Eine Auszeichnungssprache zur Darstellung hierarchischer Daten in einem strukturierten Format, die in vielen Anwendungen wie Konfigurationsdateien und Datenübertragung verwendet wird.</p>
-                </div>
-            </div>
-            <div class="language-card lua animate-on-scroll">
-                <div class="language-icon">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/lua/lua-original.svg" alt="Lua">
-                </div>
-                <h3>Lua</h3>
-                <div class="language-info">
-                    <p>Eine Skriptsprache, die für die Erstellung von Anwendungen und Spieleprogrammierung verwendet wird.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+        </section>
+    </main>
+
     <footer id="contact">
-        <h1 class="animate-on-scroll">Kontaktiere mich</h1><br>
-        <div class="container">
-            <div class="footer-content">
+        <div class="container footer-inner">
+            <div class="footer-copy reveal">
+                <p class="eyebrow">05 / Kontakt</p>
+                <h2>Eine Idee?<br><em>Lass sie uns bauen.</em></h2>
+            </div>
+            <div class="footer-actions reveal reveal-delay">
+                <a class="contact-link" href="mailto:kugelwasserbusiness@gmail.com">kugelwasserbusiness@gmail.com <span>↗</span></a>
                 <div class="social-links">
-                    <a href="mailto:kugelwasserbusiness@gmail.com" target="_blank" title="Mail" class="mail">
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                    <a href="https://discord.com/users/832589436977807420" target="_blank" title="Discord" class="discord">
-                        <i class="fab fa-discord"></i>
-                    </a>
-                    <a href="https://www.youtube.com/@Kugelwasser" target="_blank" title="YouTube" class="youtube">
-                        <i class="fab fa-youtube"></i>
-                    </a>
-                    <a href="https://github.com/kugelwasser" target="_blank" title="GitHub" class="github">
-                        <i class="fab fa-github"></i>
-                    </a>
-                </div>
-                <div class="copyright">
-                    <p>&copy; 2026 Kugelwasser. Alle Rechte vorbehalten.</p>
+                    <a href="https://github.com/kugelwasser" target="_blank" rel="noreferrer">GitHub</a>
+                    <a href="https://www.youtube.com/@Kugelwasser" target="_blank" rel="noreferrer">YouTube</a>
+                    <a href="https://discord.com/users/832589436977807420" target="_blank" rel="noreferrer">Discord</a>
                 </div>
             </div>
         </div>
+        <div class="container footer-bottom"><span>© 2026 Kugelwasser</span><span>Built with HTML, CSS & JavaScript.</span></div>
     </footer>
 
     <script src="script.js"></script>
