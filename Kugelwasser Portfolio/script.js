@@ -1,45 +1,38 @@
-document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-
+document.addEventListener('DOMContentLoaded', () => {
     const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
-    
-    mobileMenuBtn.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-        mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
-            ? '<i class="fas fa-times"></i>' 
-            : '<i class="fas fa-bars"></i>';
+
+    function closeMenu() {
+        navLinks.classList.remove('active');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        mobileMenuBtn.setAttribute('aria-label', 'Menü öffnen');
+    }
+
+    mobileMenuBtn?.addEventListener('click', () => {
+        const open = navLinks.classList.toggle('active');
+        mobileMenuBtn.setAttribute('aria-expanded', String(open));
+        mobileMenuBtn.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
     });
 
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-        });
-    });
+    document.querySelectorAll('.nav-links a').forEach(link => link.addEventListener('click', closeMenu));
 
-    const observer = new IntersectionObserver((entries) => {
+    const revealObserver = new IntersectionObserver(entries => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.12 });
 
-    document.querySelectorAll('.animate-on-scroll').forEach(element => {
-        observer.observe(element);
-    });
+    document.querySelectorAll('.reveal').forEach(element => revealObserver.observe(element));
+
+    const header = document.querySelector('.site-header');
+    const updateHeader = () => {
+        header.style.borderBottomColor = window.scrollY > 20 ? 'rgba(255,255,255,.08)' : 'transparent';
+    };
+    updateHeader();
+    window.addEventListener('scroll', updateHeader, { passive: true });
 
     const DISCORD_USER_ID = '832589436977807420';
     const statusDot = document.getElementById('discord-status-dot');
@@ -49,108 +42,80 @@ document.addEventListener('DOMContentLoaded', function () {
     const metaEl = document.getElementById('discord-meta');
     const avatarEl = document.getElementById('discord-avatar');
 
+    const statusColors = {
+        online: '#43b581',
+        idle: '#faa61a',
+        dnd: '#f04747',
+        offline: '#747f8d'
+    };
+
+    const statusLabels = {
+        online: 'Online',
+        idle: 'Abwesend',
+        dnd: 'Bitte nicht stören',
+        offline: 'Offline'
+    };
+
     function setStatusVisual(state) {
-        const colorMap = {
-            online: '#43b581',
-            idle: '#faa61a',
-            dnd: '#f04747',
-            offline: '#747f8d'
-        };
-
-        const labelMap = {
-            online: 'Online',
-            idle: 'Abwesend',
-            dnd: 'Bitte nicht stören',
-            offline: 'Offline'
-        };
-
-        statusDot.style.background = colorMap[state] || colorMap.offline;
-        statusText.textContent = labelMap[state] || 'Offline';
+        const normalized = statusColors[state] ? state : 'offline';
+        statusDot.style.backgroundColor = statusColors[normalized];
+        statusText.textContent = statusLabels[normalized];
     }
 
-    function createActivityText(data) {
+    function getActivity(data) {
         const activities = data.activities || [];
 
-        if (data.listening_to_spotify) {
-            const track = data.spotify;
+        if (data.listening_to_spotify && data.spotify) {
             return {
-                title: 'Hört gerade Spotify',
-                text: `${track.song} – ${track.artist}`,
-                meta: `${track.album}`
+                text: `Hört gerade ${data.spotify.song} – ${data.spotify.artist}`,
+                meta: data.spotify.album || ''
             };
         }
 
-        const activeActivity = activities.find(activity => activity.type !== 4) || activities[0];
-
-        if (!activeActivity) {
-            return {
-                title: 'Keine aktive Discord-Activity',
-                text: 'Aktuell nicht auf Discord aktiv.',
-                meta: ''
-            };
+        const active = activities.find(activity => activity.type !== 4) || activities[0];
+        if (!active) {
+            return { text: 'Aktuell keine aktive Discord-Activity.', meta: '' };
         }
 
-        const name = activeActivity.name || 'Discord';
-        const details = activeActivity.details || '';
-        const state = activeActivity.state || '';
-        const largeText = activeActivity.assets?.large_text || '';
-
+        const details = active.details || '';
+        const state = active.state || '';
         return {
-            title: `Aktiv: ${name}`,
-            text: [details, state].filter(Boolean).join(' • ') || 'Aktiv auf Discord',
-            meta: largeText || ''
+            text: [details, state].filter(Boolean).join(' • ') || `Aktiv: ${active.name || 'Discord'}`,
+            meta: active.assets?.large_text || active.name || ''
         };
     }
 
     async function loadDiscordPresence() {
         try {
-            const response = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_USER_ID}`);
-            const data = await response.json();
+            const response = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_USER_ID}`, { cache: 'no-store' });
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
-            if (!data.success || !data.data) {
-                throw new Error('Keine Discord-Daten verfügbar');
+            const payload = await response.json();
+            if (!payload.success || !payload.data) throw new Error('Keine Discord-Daten verfügbar');
+
+            const userData = payload.data;
+            const user = userData.discord_user;
+            const activity = getActivity(userData);
+
+            if (user?.avatar) {
+                avatarEl.src = `https://cdn.discordapp.com/avatars/${DISCORD_USER_ID}/${user.avatar}.png?size=256`;
             }
 
-            const userData = data.data;
-            const user = userData.discord_user;
-            const avatarUrl = user.avatar
-                ? `https://cdn.discordapp.com/avatars/832589436977807420/fcc756c6bab07bbcfa8b769291e1f66b?size=256`
-                : `https://cdn.discordapp.com/embed/avatars/${Number(user.discriminator) % 5}.png`;
-
-            avatarEl.src = avatarUrl;
-            nameEl.textContent = user.username || 'Kugelwasser';
+            nameEl.textContent = user?.global_name || user?.username || 'Kugelwasser';
             setStatusVisual(userData.discord_status || 'offline');
-
-            const activity = createActivityText(userData);
             activityEl.textContent = activity.text;
             metaEl.textContent = activity.meta;
-
-            if (activity.meta) {
-                metaEl.classList.add('visible');
-            } else {
-                metaEl.classList.remove('visible');
-            }
+            metaEl.hidden = !activity.meta;
         } catch (error) {
-            console.error('Discord status fetch failed:', error);
+            console.warn('Discord presence unavailable:', error);
             setStatusVisual('offline');
             nameEl.textContent = 'Kugelwasser';
-            activityEl.textContent = 'Discord-Status konnte nicht geladen werden.';
-            metaEl.textContent = 'Bitte später erneut versuchen';
-            metaEl.classList.add('visible');
+            activityEl.textContent = 'Discord-Status konnte gerade nicht geladen werden.';
+            metaEl.textContent = '';
+            metaEl.hidden = true;
         }
     }
 
     loadDiscordPresence();
-    setInterval(loadDiscordPresence, 15000);
-
-    window.addEventListener('scroll', () => {
-        const header = document.querySelector('header');
-        if (window.scrollY > 100) {
-            header.style.backgroundColor = 'rgba(15, 23, 42, 0.98)';
-            header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.2)';
-        } else {
-            header.style.backgroundColor = 'rgba(15, 23, 42, 0.95)';
-            header.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
-        }
-    });
+    window.setInterval(loadDiscordPresence, 15000);
 });
