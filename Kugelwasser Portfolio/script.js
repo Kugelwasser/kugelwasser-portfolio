@@ -4,12 +4,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function closeMenu() {
         navLinks?.classList.remove('active');
+        document.body.classList.remove('menu-open');
         mobileMenuBtn?.setAttribute('aria-expanded', 'false');
         mobileMenuBtn?.setAttribute('aria-label', 'Menü öffnen');
     }
 
     mobileMenuBtn?.addEventListener('click', () => {
         const open = navLinks.classList.toggle('active');
+        document.body.classList.toggle('menu-open', open);
         mobileMenuBtn.setAttribute('aria-expanded', String(open));
         mobileMenuBtn.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
     });
@@ -55,22 +57,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const user = data.discord_user;
 
             statusIndicator.className = `status-dot ${discordStatus}`;
-            statusText.textContent = {
-                online: 'Online',
-                idle: 'Abwesend',
-                dnd: 'Bitte nicht stören',
-                offline: 'Offline'
-            }[discordStatus] || 'Offline';
+            statusText.textContent = { online: 'Online', idle: 'Abwesend', dnd: 'Bitte nicht stören', offline: 'Offline' }[discordStatus] || 'Offline';
 
-            if (user?.global_name || user?.username) {
-                nameElement.textContent = user.global_name || user.username;
-            }
+            if (user?.global_name || user?.username) nameElement.textContent = user.global_name || user.username;
+            if (user?.avatar) avatarElement.src = `https://cdn.discordapp.com/avatars/${userId}/${user.avatar}.png?size=256`;
 
-            if (user?.avatar) {
-                avatarElement.src = `https://cdn.discordapp.com/avatars/${userId}/${user.avatar}.png?size=256`;
-            }
-
-            // Spotify wird von Lanyard separat bereitgestellt.
             if (data.listening_to_spotify && data.spotify) {
                 activityText.textContent = `Hört gerade: ${data.spotify.song}`;
                 metaElement.textContent = data.spotify.artist || '';
@@ -78,17 +69,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Discord-Aktivitäten: Spiel, Rich Presence etc.
             const currentActivity = activities.find(activity => activity.type !== 4) || activities[0];
-
             if (currentActivity) {
                 const action = currentActivity.type === 0 ? 'Spielt' : 'Macht';
                 activityText.textContent = `${action}: ${currentActivity.name}`;
-
-                const details = [currentActivity.details, currentActivity.state]
-                    .filter(Boolean)
-                    .join(' • ');
-                metaElement.textContent = details || customStatus || '';
+                metaElement.textContent = [currentActivity.details, currentActivity.state].filter(Boolean).join(' • ') || customStatus || '';
                 metaElement.hidden = !metaElement.textContent;
             } else if (customStatus) {
                 activityText.textContent = 'Status';
